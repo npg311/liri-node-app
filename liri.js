@@ -25,27 +25,62 @@ if (command === "concert-this") {
         .then(function (response) {
             let jsonData = response.data;
 
-            for(let i = 0; i < jsonData.length; i++) {
+            for (let i = 0; i < jsonData.length; i++) {
                 let showData = [
                     console.log("=======================",
-                    "Venue: " + jsonData[i].venue.name,
-                    "Location: " + jsonData[i].venue.city,
-                    "Date: " + jsonData[i].datetime,
-                    "======================="),
+                        "Venue: " + jsonData[i].venue.name,
+                        "Location: " + jsonData[i].venue.city,
+                        "Date: " + jsonData[i].datetime,
+                        "======================="),
                 ].join("\n\n");
             }
 
             console.log(showData);
-        
+
         })
 }
+else if (command === 'movie-this') {
+    axios
+        .get(movieURL)
+        .then(function (response) {
+            let jsonData = response.data;
+            
+            let movieData = [
+                console.log('============================'),
+                'Title: ' + jsonData.Title,
+                'Released: ' + jsonData.Released,
+                'IMDB Rating: ' + jsonData.imdbRating,
+                'Country: ' + jsonData.Country,
+                'Language: ' + jsonData.Language,
+                'Plot Summary ' + jsonData.Plot,
+                'Cast: ' + jsonData.Actors,
+                console.log('============================'),
+            ].join('\n\n');
+            console.log(movieData);
+        
+        })
+
+} /* else if (command === 'spotify-this-song') {
+    axios
+        .get(spotifyURL)
+        .then(function (response) {
+            let jsonData = response.data;
+            console.log(jsonData);
+            for (let i = 0; i < jsonData.length; i++) {
+                let artistData = [
+
+                ]
+            }
+        })
+}; */
 
 
-axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
-    function (response) {
-        console.log("The movie's rating is: " + response.data.imdbRating);
-    }
-);
+
+console.log('Command: ' + command);
+console.log('Search: ' + search);
+
+
+
 
 var fs = require("fs");
 
