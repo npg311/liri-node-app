@@ -2,7 +2,12 @@ require("dotenv").config();
 
 const keys = require("./keys.js");
 const axios = require("axios");
-/*const spotify = new Spotify(keys.spotify);
+
+const Spotify = require("node-spotify-api");
+const moment = require("moment");
+const fs = require("fs");
+
+var spotify = new Spotify(keys.spotify);
 
 /*9. Make it so liri.js can take in one of the following commands:
 * `concert-this`
@@ -60,7 +65,25 @@ else if (command === 'movie-this') {
         
         })
 
-} /* else if (command === 'spotify-this-song') {
+}  else (command === 'spotify-this-song')
+var getMeSpotify = function(songName) {
+  if (songName === undefined) {
+    songName = "What's my age again";
+  }
+
+    spotify.search(
+        {
+            type: "track",
+            query: songName
+          },
+          function(err, data) {
+            if (err) {
+              console.log("Error occurred: " + err);
+              return;
+            }
+        }   
+    );
+{
     axios
         .get(spotifyURL)
         .then(function (response) {
@@ -72,7 +95,7 @@ else if (command === 'movie-this') {
                 ]
             }
         })
-}; */
+}; 
 
 
 
@@ -82,7 +105,7 @@ console.log('Search: ' + search);
 
 
 
-var fs = require("fs");
+
 
 
 fs.readFile("movies.txt", "utf8", function (error, data) {
@@ -103,3 +126,4 @@ fs.readFile("movies.txt", "utf8", function (error, data) {
 
 
 console.log(process.env.SPOTIFY_ID)
+};
